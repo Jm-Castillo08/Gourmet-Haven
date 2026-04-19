@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Gourmet Haven | Premium Catering</title>
+    <link rel="stylesheet" href="Landingpage.css">
+</head>
+<body>
+
+<nav class="nav-chan">
+    <div class="logo">🍽️ Gourmet Haven</div>
+    <div class="burger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a onclick="scrollToHome()">🏠 Home</a>
+        <a onclick="scrollToAbout()">📖 About</a>
+        <a onclick="scrollToMenu()">✨ Menu</a>
+    </div>
+</nav>
+
+<!-- HERO / LANDING SECTION -->
+<section class="hero" id="homeSection">
+    <img class="hero-bg" src="https://otbcatering.co.za/wp-content/uploads/2023/09/buffet-food-catering-food-party-restaurant-mini-canapes-snacks-appetizers-made-by-aiartificial-intelligence_41969-11904.jpg" alt="catering spread">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Gourmet Haven Catering</h1>
+        <p>Exquisite flavors, crafted for your special moments</p>
+        <a href="order.html" class="order-now-btn">✨ Order Now ✨</a>
+    </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="section" id="aboutSection">
+    <div class="section-title"><span>✦ Our Culinary Story ✦</span></div>
+    <div class="about-grid">
+        <div class="about-text">
+            <p>Founded with a passion for authentic Filipino feast & modern elegance, Gourmet Haven brings together time-honored recipes and premium ingredients. Every platter is curated by master chefs who believe that food is love served warm.</p>
+            <p>From intimate gatherings to grand celebrations, our catering transforms moments into memories. We prioritize fresh produce, traditional cooking methods, and an unforgettable taste that speaks heritage.</p>
+            <p><strong>📍 CDO's premium catering service — we deliver excellence.</strong></p>
+        </div>
+        <div class="about-img">
+            <img src="https://images.pexels.com/photos/4394612/pexels-photo-4394612.jpeg?auto=compress&cs=tinysrgb&w=600" alt="chef preparing gourmet food">
+        </div>
+    </div>
+</section>
+
+<!-- MENU SECTION - Fixed Dish Images (Non-Editable) -->
+<section class="section" id="menuSection">
+    <div class="section-title"><span>🍛 Our Signature Menu</span></div>
+    
+    <div class="menu-cards" id="menuCardsContainer">
+        <!-- Menu cards will be populated by JavaScript with fixed images -->
+    </div>
+    
+    <div class="order-redirect">
+        <p>Ready to place your order?</p>
+        <a href="order.html" class="redirect-order-btn">📝 Go to Order Page →</a>
+    </div>
+    
+    <footer>✨ Freshly prepared • Authentic recipes • Premium service ✨</footer>
+</section>
+
+<script>
+    // Food data
+    const food_names = ["Chicken Adobo Platter", "Lechon Kawali", "Fried Rice Bilao", "Mixed Vegetables", "Fruit Salad Bowl"];
+    const food_prices = [2500, 3000, 1200, 800, 1000];
+    
+    // Fixed dish images (pre-loaded, non-editable)
+    const dishImages = [
+        "https://recipetineats.com/wp-content/uploads/2015/02/Filipino-Chicken-Adobo_6.jpg",
+        "https://almostnordic.com/wp-content/uploads/2022/09/lechon-kawali-recipe.jpg",
+        "https://cdn.shopify.com/s/files/1/0557/5390/0228/products/inasal-rice_1024x1024.png?v=1659108234",
+        "https://kalabashcuisine.com/wp-content/uploads/2022/10/mixed-vegetables.jpg",
+        "https://www.shelovesbiscotti.com/wp-content/uploads/2020/06/Healthy-Fruit-Salad-Recipe-5.jpg"
+    ];
+    
+    // Descriptions for each dish
+    const descriptions = [
+        "Tender chicken marinated in soy, vinegar, and garlic, slow-cooked to perfection. A classic Filipino comfort food.",
+        "Crispy deep-fried pork belly with golden crackling, served with signature liver sauce. Crunchy on the outside, juicy inside.",
+        "Garlicky fried rice mixed with scrambled eggs and green peas, perfect for sharing. Aromatic and flavorful.",
+        "Fresh seasonal vegetables stir-fried in savory oyster sauce with tofu. Healthy and delicious.",
+        "Assorted fresh fruits with creamy coconut dressing and cheese toppings. A refreshing end to your feast."
+    ];
+    
+    // Render menu cards with fixed images (no editable inputs)
+    function renderMenu() {
+        const container = document.getElementById('menuCardsContainer');
+        if (!container) return;
+        
+        let cardsHtml = '';
+        for (let i = 0; i < food_names.length; i++) {
+            cardsHtml += `
+                <div class="food-card">
+                    <div class="food-image-container">
+                        <img class="food-dish-img" src="${dishImages[i]}" alt="${food_names[i]}" onerror="this.src='https://placehold.co/300x200?text=🍽️+Image+Not+Found'">
+                    </div>
+                    <h3>${food_names[i]}</h3>
+                    <div class="price">₱${food_prices[i].toLocaleString()}</div>
+                    <div class="menu-description">${descriptions[i]}</div>
+                    <div class="dish-tags">
+                        <span class="tag">⭐ Premium</span>
+                        <span class="tag">🔥 Best Seller</span>
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = cardsHtml;
+    }
+    
+    // Scroll functions
+    function scrollToHome() {
+        document.getElementById('homeSection').scrollIntoView({ behavior: 'smooth' });
+        closeMobileMenu();
+    }
+    
+    function scrollToAbout() {
+        document.getElementById('aboutSection').scrollIntoView({ behavior: 'smooth' });
+        closeMobileMenu();
+    }
+    
+    function scrollToMenu() {
+        document.getElementById('menuSection').scrollIntoView({ behavior: 'smooth' });
+        closeMobileMenu();
+    }
+    
+    // Mobile menu functions
+    function toggleMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
+        const burger = document.querySelector('.burger');
+        const lines = document.querySelectorAll('.burger div');
+        if (navLinks.classList.contains('active')) {
+            if (lines.length === 3) {
+                lines[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+                lines[1].style.opacity = '0';
+                lines[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+            }
+        } else {
+            lines.forEach(l => { l.style.transform = ''; l.style.opacity = '1'; });
+        }
+    }
+    
+    function closeMobileMenu() {
+        const navLinks = document.getElementById('navLinks');
+        if (navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            const lines = document.querySelectorAll('.burger div');
+            lines.forEach(l => { l.style.transform = ''; l.style.opacity = '1'; });
+        }
+    }
+    
+    // Make functions global
+    window.scrollToMenu = scrollToMenu;
+    window.scrollToAbout = scrollToAbout;
+    window.scrollToHome = scrollToHome;
+    window.toggleMenu = toggleMenu;
+    
+    // Initialize page
+    renderMenu();
+</script>
+</body>
+</html>
